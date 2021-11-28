@@ -9,8 +9,9 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "chai": "^4.3.4",
+    "dotenv": "^10.0.0",
     "ethereum-waffle": "^3.4.0",
-    "ethers": "^5.5.1",
+    "ethers": "^5.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -22,7 +23,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "hatbuild": "hardhat compile && hardhat test",
-    "hatdeploy": "yarn hardhat run scripts/deploy.js --network localhost"
+    "hatdeploy": "yarn hardhat run scripts/deploy.js --network localhost",
+    "hatserver": "yarn hardhat node",
+    "hatrinkeby": "yarn hardhat run scripts/deploy.js --network rinkeby"
   },
   "eslintConfig": {
     "extends": [

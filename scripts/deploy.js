@@ -1,4 +1,4 @@
-const main = async () => {
+async function main(){
     // Gets Deployer Address and Balance
     const [deployer] = await hre.ethers.getSigners();
     const accountBalance = await deployer.getBalance();
@@ -18,7 +18,7 @@ const main = async () => {
     console.log('WavePortal address: ', contractDeployed.address);
   };
   
-  const runMain = async () => {
+  async function runMain(){
     try {
       await main();
       process.exit(0);

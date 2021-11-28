@@ -21,7 +21,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "hatbuild": "hardhat compile && hardhat test"
+    "hatbuild": "hardhat compile && hardhat test",
+    "hatdeploy": "yarn hardhat run scripts/deploy.js --network localhost"
   },
   "eslintConfig": {
     "extends": [

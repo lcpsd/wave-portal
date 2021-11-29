@@ -72,14 +72,15 @@ function App() {
         const wavePortalContract = new ethers.Contract(contractAddress, contractAbi, signer)
 
         const waveTxn = await wavePortalContract.wave();
-        toast.info(`Mining...\n ${waveTxn.hash}`)
+
+        toast.info(`Mining...\n ${waveTxn.hash}`, {autoClose: 20000})
 
         await waveTxn.wait();
         toast.success((
           <a href={`https://rinkeby.etherscan.io/tx/${waveTxn.hash}`} target="_blank" rel="noreferrer">
             Click to view on Etherscan 
           </a>
-        ))
+        ), {autoClose: false})
 
         setTotalWaves(Number(await wavePortalContract.getTotalWaves()))
 

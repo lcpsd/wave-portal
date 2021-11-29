@@ -8,4 +8,10 @@ module.exports = {
       accounts: [`0x${process.env.RINKEBY_PRIVATE_KEY}`],
     },
   },
+  paths: {
+    sources: "./src/contracts",
+    tests: "./src/test",
+    cache: "./src/cache",
+    artifacts: "./src/artifacts"
+  },
 };

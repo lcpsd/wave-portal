@@ -12,6 +12,7 @@ async function main(){
     // deploy contract
     const contractDeployed = await contract.deploy();
 
+    // Refresh abi info
     await contractDeployed.deployed();
     
     // show contract address

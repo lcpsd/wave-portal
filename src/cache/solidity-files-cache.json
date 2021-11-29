@@ -1,6 +1,43 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
+    "C:\\Users\\lucas\\Documents\\Dev\\wave-portal\\src\\contracts\\WavePortal.sol": {
+      "lastModificationDate": 1638194152022,
+      "contentHash": "3b2a51a3feefc70b549a1ccc5caa49f5",
+      "sourceName": "src/contracts/WavePortal.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "hardhat/console.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "WavePortal"
+      ]
+    },
     "C:\\Users\\lucas\\Documents\\Dev\\wave-portal\\node_modules\\hardhat\\console.sol": {
       "lastModificationDate": 1638100114624,
       "contentHash": "cc4777addd464ea56fa35b1c45df0591",
@@ -34,43 +71,6 @@
       ],
       "artifacts": [
         "console"
-      ]
-    },
-    "C:\\Users\\lucas\\Documents\\Dev\\wave-portal\\contracts\\WavePortal.sol": {
-      "lastModificationDate": 1638107847337,
-      "contentHash": "0f7cfbf709d59a460fd062eebad371d2",
-      "sourceName": "contracts/WavePortal.sol",
-      "solcConfig": {
-        "version": "0.8.0",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "hardhat/console.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "WavePortal"
       ]
     }
   }

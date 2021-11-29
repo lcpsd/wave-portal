@@ -25,7 +25,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "hatbuild": "hardhat compile && hardhat test",
-    "hatdeploy": "yarn hardhat run scripts/deploy.js --network localhost",
+    "hattest": "yarn hardhat run scripts/run.js --network localhost",
     "hatserver": "yarn hardhat node",
     "hatrinkeby": "yarn hardhat run scripts/deploy.js --network rinkeby"
   },

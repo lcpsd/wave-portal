@@ -6,21 +6,47 @@
     font-family: BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+// reset link style
 a:link {
     text-decoration: none;
-  }
+    color: inherit;
+}
   
-  a:visited {
+a:visited {
     text-decoration: none;
-  }
-  
-  a:hover {
+    color: inherit;
+}
+
+a:hover {
     text-decoration: none;
-  }
-  
-  a:active {
+    color: inherit;
+}
+
+a:active {
     text-decoration: none;
-  }
+    color: inherit;
+}
+
+// reset scroll bar
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgb(19, 17, 26);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(162, 0, 255);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    filter: brightness(0.8);
+}
 
 button{
     cursor: pointer;
@@ -31,11 +57,17 @@ button{
     }
 }
 
+
+body{
+    overflow-x: hidden;
+}
+
 .mainContainer{
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
+    padding: 0 0 2rem 0;
     display: flex;
     flex-direction: column;
+    gap: 2rem;
     align-items: center;
     justify-content: center;
     background: rgb(19, 17, 26);
@@ -67,6 +99,20 @@ button{
             color: transparent;
         }
 
+        textarea{
+            
+            background: rgb(31, 28, 43);
+            padding: 1rem 2rem;
+            min-width: 100%;
+            max-width: 200px;
+            max-height: 200px;
+            border: 1px solid rgb(162, 0, 255);
+            border-radius: 0.3rem;
+            color: #fff;
+            font-size: 1.5rem;
+            overflow-y: hidden;
+        }
+
         .waveButton{
             padding: 1rem 4rem;
             border-radius: 0.3rem;
@@ -75,16 +121,67 @@ button{
             background: rgb(162, 0, 255);
             font-weight: bold;
             color: rgb(255, 255, 255);
+
+            &:disabled{
+                cursor: not-allowed;
+            }
+        }
+
+    }
+
+    #waveCards{
+        max-height: 100vh;
+        overflow-y: auto;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100vw;
+        padding: 1rem;
+        
+        h1{
+            color:rgb(162, 0, 255);
+        }
+
+        .waveCard{
+            background: rgb(162, 0, 255);
+            padding: 2rem;
+            border-radius: 0.3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            color:#fff;
+            width: 90%;
+            
+            span{
+                font-weight: bold;
+                color: turquoise;
+            }
+
+            .address, .timestamp, .message{
+                overflow-wrap: break-word;
+                line-break: auto;
+            }
         }
     }
 }
 
 @media(min-width: 768px){
     .mainContainer{
+
+        padding: 2rem;
+        flex-direction: row;
+        height: 100vh;
+
         .dataContainer{
             height: auto;
             width: auto;
             border-radius: 0.3rem;
+        }
+
+        #waveCards{
+            height: 90vh;
+            max-width: 500px;
         }
     }
 }

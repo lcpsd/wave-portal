@@ -21,15 +21,9 @@ function App() {
   const contractAbi = abi
 
   // creates a provider to intereact with ethereum blockchain if has ethereum wallet
-  let provider = undefined
-  let signer = undefined
-  let wavePortalContract = undefined
-
-  if(ethereum){
-    provider = new ethers.providers.Web3Provider(ethereum)
-    signer = provider.getSigner();
-    wavePortalContract = new ethers.Contract(contractAddress, contractAbi, signer);
-  }
+  const provider = new ethers.providers.Web3Provider(ethereum)
+  const signer = provider.getSigner();
+  let wavePortalContract = new ethers.Contract(contractAddress, contractAbi, signer);
 
   async function connectWallet(){
     try{
@@ -161,26 +155,32 @@ function App() {
   }, [])
 
   useEffect(() => {
+
     let wavePortalContract;
 
-    // event monitor
     const onNewWave = (from, timestamp, message) => {
-      setAllWaves([ ...allWaves,
+      console.log('newWave', from, timestamp, message);
+      setAllWaves(prevState => [
+        ...prevState,
         {
           address: from,
           timestamp: new Date(timestamp * 1000),
           message: message,
         },
-      ]);
-    };
+      ])
+    }
 
-    if (ethereum) {
-      wavePortalContract.on('NewWave', onNewWave);
+    if (window.ethereum) {
+      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      const signer = provider.getSigner()
+
+      wavePortalContract = new ethers.Contract(contractAddress, contractAbi, signer)
+      wavePortalContract.on('newWave', onNewWave)
     }
 
     return () => {
       if (wavePortalContract) {
-        wavePortalContract.off('NewWave', onNewWave);
+        wavePortalContract.off('newWave', onNewWave)
       }
     };
   })

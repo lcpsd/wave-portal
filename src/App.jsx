@@ -90,10 +90,9 @@ function App() {
   async function wave(){
     try{
       
-      if(ethereum){
         // gets the sign of our provider (origin and integrity data)
 
-        const waveTxn = await wavePortalContract.wave(waveMessage);
+        const waveTxn = await wavePortalContract.wave(waveMessage, {gasLimit: 300000});
 
         toast.info(`Mining...\n ${waveTxn.hash}`, {autoClose: 20000})
 
@@ -108,7 +107,6 @@ function App() {
         getAllWaves()
 
         return
-      }
 
       toast.warning('Metamask Needed!', {autoClose: false})
 

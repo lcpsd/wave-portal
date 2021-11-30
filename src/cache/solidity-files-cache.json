@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "C:\\Users\\lucas\\Documents\\Dev\\wave-portal\\src\\contracts\\WavePortal.sol": {
-      "lastModificationDate": 1638194152022,
-      "contentHash": "3b2a51a3feefc70b549a1ccc5caa49f5",
+      "lastModificationDate": 1638231088413,
+      "contentHash": "d961578c311912abcd220c88451afeac",
       "sourceName": "src/contracts/WavePortal.sol",
       "solcConfig": {
         "version": "0.8.0",

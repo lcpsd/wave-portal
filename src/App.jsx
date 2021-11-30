@@ -17,7 +17,7 @@ function App() {
 
   // ethereum object injected by metamask in window
   const {ethereum} = window
-  const contractAddress = '0xf41de70B3e43651Af6ac3BDC58815221Ee962Da0'
+  const contractAddress = '0xD32e7004a60a3b3f2080e0538e7651cd44a7F978'
   const contractAbi = abi
 
   // creates a provider to intereact with ethereum blockchain if has ethereum wallet

@@ -17,13 +17,19 @@ function App() {
 
   // ethereum object injected by metamask in window
   const {ethereum} = window
-  const contractAddress = '0x90e17d2D05acAFEDCfDd1b6a1e4dDEaE5038adF8'
+  const contractAddress = '0x632f50aCae8bC04dFE9c844cD899aE2854b053c8'
   const contractAbi = abi
 
   // creates a provider to intereact with ethereum blockchain if has ethereum wallet
-  let provider = new ethers.providers.Web3Provider(ethereum)
-  const signer = provider.getSigner();
-  const wavePortalContract = new ethers.Contract(contractAddress, contractAbi, signer);
+  let provider = undefined
+  let signer = undefined
+  let wavePortalContract = undefined
+
+  if(ethereum){
+    provider = new ethers.providers.Web3Provider(ethereum)
+    signer = provider.getSigner();
+    wavePortalContract = new ethers.Contract(contractAddress, contractAbi, signer);
+  }
 
   async function connectWallet(){
     try{
@@ -84,9 +90,9 @@ function App() {
       })
     })
 
-    setAllWaves(allWavesArray)
-
-    }
+    setAllWaves(...allWaves, allWavesArray)
+  }
+  
   async function wave(){
     try{
       
@@ -107,8 +113,6 @@ function App() {
         getAllWaves()
 
         return
-
-      toast.warning('Metamask Needed!', {autoClose: false})
 
     }catch(error){
       console.log(error)
@@ -153,9 +157,33 @@ function App() {
   useEffect(() => {
     getWaveCount()
     checkWalletConnection()
-    getAllWaves()
     // eslint-disable-next-line
   }, [])
+
+  useEffect(() => {
+    let wavePortalContract;
+
+    // event monitor
+    const onNewWave = (from, timestamp, message) => {
+      setAllWaves([ ...allWaves,
+        {
+          address: from,
+          timestamp: new Date(timestamp * 1000),
+          message: message,
+        },
+      ]);
+    };
+
+    if (ethereum) {
+      wavePortalContract.on('NewWave', onNewWave);
+    }
+
+    return () => {
+      if (wavePortalContract) {
+        wavePortalContract.off('NewWave', onNewWave);
+      }
+    };
+  })
 
   return (
     <div className="mainContainer">

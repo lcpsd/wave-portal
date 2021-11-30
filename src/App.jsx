@@ -151,6 +151,7 @@ function App() {
   useEffect(() => {
     getWaveCount()
     checkWalletConnection()
+    getAllWaves()
     // eslint-disable-next-line
   }, [])
 
@@ -159,9 +160,9 @@ function App() {
     let wavePortalContract;
 
     const onNewWave = (from, timestamp, message) => {
-      console.log('newWave', from, timestamp, message);
-      setAllWaves(prevState => [
-        ...prevState,
+      
+      setAllWaves([
+        ...allWaves,
         {
           address: from,
           timestamp: new Date(timestamp * 1000),
@@ -183,7 +184,8 @@ function App() {
         wavePortalContract.off('newWave', onNewWave)
       }
     };
-  })
+    // eslint-disable-next-line 
+  }, [])
 
   return (
     <div className="mainContainer">
@@ -217,6 +219,7 @@ function App() {
         
       <div id="waveCards">
       <h1>Last Waves</h1>
+      {console.log(allWaves)}
       {allWaves.map((wave, index) => {
           return (
             <div key={index} className="waveCard">

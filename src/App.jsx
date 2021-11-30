@@ -17,13 +17,13 @@ function App() {
 
   // ethereum object injected by metamask in window
   const {ethereum} = window
-  const contractAddress = '0x90e17d2D05acAFEDCfDd1b6a1e4dDEaE5038adF8'
+  const contractAddress = '0x632f50aCae8bC04dFE9c844cD899aE2854b053c8'
   const contractAbi = abi
 
   // creates a provider to intereact with ethereum blockchain if has ethereum wallet
-  let provider = new ethers.providers.Web3Provider(ethereum)
+  const provider = new ethers.providers.Web3Provider(ethereum)
   const signer = provider.getSigner();
-  const wavePortalContract = new ethers.Contract(contractAddress, contractAbi, signer);
+  let wavePortalContract = new ethers.Contract(contractAddress, contractAbi, signer);
 
   async function connectWallet(){
     try{
@@ -84,9 +84,9 @@ function App() {
       })
     })
 
-    setAllWaves(allWavesArray)
-
-    }
+    setAllWaves(...allWaves, allWavesArray)
+  }
+  
   async function wave(){
     try{
       
@@ -107,8 +107,6 @@ function App() {
         getAllWaves()
 
         return
-
-      toast.warning('Metamask Needed!', {autoClose: false})
 
     }catch(error){
       console.log(error)
@@ -153,9 +151,39 @@ function App() {
   useEffect(() => {
     getWaveCount()
     checkWalletConnection()
-    getAllWaves()
     // eslint-disable-next-line
   }, [])
+
+  useEffect(() => {
+
+    let wavePortalContract;
+
+    const onNewWave = (from, timestamp, message) => {
+      console.log('newWave', from, timestamp, message);
+      setAllWaves(prevState => [
+        ...prevState,
+        {
+          address: from,
+          timestamp: new Date(timestamp * 1000),
+          message: message,
+        },
+      ])
+    }
+
+    if (window.ethereum) {
+      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      const signer = provider.getSigner()
+
+      wavePortalContract = new ethers.Contract(contractAddress, contractAbi, signer)
+      wavePortalContract.on('newWave', onNewWave)
+    }
+
+    return () => {
+      if (wavePortalContract) {
+        wavePortalContract.off('newWave', onNewWave)
+      }
+    };
+  })
 
   return (
     <div className="mainContainer">

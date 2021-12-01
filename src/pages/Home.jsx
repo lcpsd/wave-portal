@@ -14,7 +14,6 @@ export function Home({ethereum}) {
   const [totalWaves, setTotalWaves] = useState(0)
   const [allWaves, setAllWaves] = useState([])
   const [waveMessage, setWaveMesssage] = useState("")
-  const [allWavesLoading, setAllWavesLoading] = useState(false)
 
   // ethereum object injected by metamask in window
   const contractAddress = '0x632f50aCae8bC04dFE9c844cD899aE2854b053c8'
@@ -29,8 +28,6 @@ export function Home({ethereum}) {
     try{
       // Request account authorization
       const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-
-      console.log(accounts)
 
       //  Store Account
       setCurrentAccount(accounts[0])
@@ -75,9 +72,8 @@ export function Home({ethereum}) {
       })
     })
 
-    setAllWaves((pasState => [...pasState, allWavesArray]))
+    setAllWaves(allWavesArray)
 
-    setAllWavesLoading(true)
   }
   
   async function wave(){
@@ -88,7 +84,7 @@ export function Home({ethereum}) {
         const waveTxn = await wavePortalContract.wave(waveMessage, {gasLimit: 300000});
 
         toast.info(`Mining...\n ${waveTxn.hash}`, {autoClose: 20000})
-
+      
         await waveTxn.wait();
         toast.success((
           <a href={`https://rinkeby.etherscan.io/tx/${waveTxn.hash}`} target="_blank" rel="noreferrer">
@@ -97,8 +93,8 @@ export function Home({ethereum}) {
         ), {autoClose: false})
 
         setTotalWaves(Number(await wavePortalContract.getTotalWaves()))
+        
         getAllWaves()
-
         return
 
     }catch(error){
@@ -149,14 +145,15 @@ export function Home({ethereum}) {
 
     const onNewWave = (from, timestamp, message) => {
       
-      setAllWaves(prevState => [
-        ...prevState,
+      setAllWaves([
+        ...allWaves,
         {
           address: from,
           timestamp: new Date(timestamp * 1000),
           message: message,
         },
       ])
+
     }
 
     if (ethereum) {
@@ -214,7 +211,7 @@ export function Home({ethereum}) {
         
       <div id="waveCards">
       <h1>Last Waves</h1>
-      {allWavesLoading && allWaves[0].map((wave, index) => {
+      {allWaves.length && allWaves.map((wave, index) => {
           return (
             <div key={index} className="waveCard">
               

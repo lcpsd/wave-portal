@@ -21,7 +21,7 @@ export function Home({ethereum}) {
 
   // creates a provider to intereact with ethereum blockchain if has ethereum wallet
   const provider = new ethers.providers.Web3Provider(ethereum)
-  const signer = provider.getSigner();
+  const signer = provider.getSigner()
   let wavePortalContract = new ethers.Contract(contractAddress, contractAbi, signer);
 
   async function connectWallet(){
@@ -224,7 +224,7 @@ export function Home({ethereum}) {
               </div>
 
               <div className="timestamp">
-                <span>Time:</span> {wave.timestamp}
+                <span>Time:</span> {wave.timestamp.toString()}
               </div>
 
             </div>)

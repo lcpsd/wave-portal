@@ -22,20 +22,15 @@ export function Home({ethereum}) {
 
   // creates a provider to intereact with ethereum blockchain if has ethereum wallet
   const provider = new ethers.providers.Web3Provider(ethereum)
-  console.log(provider)
   const signer = provider.getSigner();
   let wavePortalContract = new ethers.Contract(contractAddress, contractAbi, signer);
 
   async function connectWallet(){
     try{
-      
-      if(!ethereum){
-        toast.warning('Metamask Needed!', {autoClose: false})
-        return
-      }
-
       // Request account authorization
       const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+
+      console.log(accounts)
 
       //  Store Account
       setCurrentAccount(accounts[0])
@@ -139,11 +134,14 @@ export function Home({ethereum}) {
   }
 
   useEffect(() => {
-    getWaveCount()
     checkWalletConnection()
-    getAllWaves()
+    
+    if(currentAccount){
+      getWaveCount()
+      getAllWaves()
+    }
     // eslint-disable-next-line
-  }, [])
+  }, [currentAccount])
 
   useEffect(() => {
 

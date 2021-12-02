@@ -9,11 +9,11 @@ https://romantic-hugle-1bb470.netlify.app/
 ## Commands:
 
 ```shell
-yarn hattest
-yarn hatserver
-yarn hatdeploy
-yarn hatrinkeby
-yarn start
-yarn build
+yarn hattest //Tests
+yarn hatserver //Temporary blockchain local server
+yarn hatdeploy  // Deploy on local server
+yarn hatrinkeby // upload on rinkeby
+yarn start //React server
+yarn build //React build
 ```
 >> Configure the .env

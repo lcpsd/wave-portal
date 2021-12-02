@@ -3,6 +3,9 @@
 # Wave Portal
 A pretty simple Ethereum Dapp thats create and update messages in blockchain.
 
+## Network
+Rinkeby
+
 ## Hosting
 https://romantic-hugle-1bb470.netlify.app/
 
